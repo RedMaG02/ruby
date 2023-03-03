@@ -9,3 +9,15 @@ def get_min(arr)
 
     return min
 end
+
+
+def get_index_of_first_positive(arr)
+
+    for i in (0...arr.size) do
+        if arr[i] >= 0
+            return i
+        end
+    end
+
+    return nil
+end
