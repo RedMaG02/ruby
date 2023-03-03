@@ -25,3 +25,25 @@ def left_shift(arr)
    
     return left_shift!(new_arr)
 end
+
+
+def nonodd_odd_array(arr)
+    new_arr = Array.new arr
+    
+    arr.each_index.
+    {
+        |i|
+        i % 2 == 0
+        new_arr.append(arr[i])
+    }
+
+    arr.each_index.
+    {
+        |i|
+        i % 2 != 0
+        new_arr.append(arr[i])
+    }
+
+    return new_arr
+
+end
