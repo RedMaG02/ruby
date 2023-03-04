@@ -47,3 +47,20 @@ def nonodd_odd_array(arr)
     return new_arr
 
 end
+
+
+def method5(list, output_list1, output_list2)
+    output_list1 = Array.new list
+    output_list1.uniq!()
+    output_list2 = Array.new 
+
+    output_list1.each_index
+    {
+        |i|
+        output_list2.append(list.count{|el| el == output_list1[i]})
+    }
+
+    return nil
+
+end
+    
