@@ -11,9 +11,7 @@ def get_product_of_digits_that_not_divided_by5(x)
     result = 1
     count = 0
 
-    x.digits.each 
-    { 
-        |digit| 
+    x.digits.each{ |digit| 
 
         if digit % 5 != 0
             result *= digit
@@ -30,9 +28,7 @@ end
 
 def get_max_odd_nonprime_divider(x)
 
-    (x/2).downto(9).each
-    {
-        |candidate|
+    (x/2).downto(9).each{ |candidate|
         if !prime?(candidate) and candidate % 2 != 0 and x % candidate == 0
             return candidate
         end
@@ -46,10 +42,9 @@ def get_product_of_digits(x)
 
     result = 1
 
-    x.digits.each
-    {
-        [gigit]
-        result *= gidit
+    x.digits.each{
+        |digit|
+        result *= digit
     }
 
     return result

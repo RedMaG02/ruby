@@ -16,18 +16,19 @@ def local_min?(arr, candidate_index)
 
 end
 
-
+#Returns self with first element on the last place
 def left_shift!(arr)
     return arr.append(arr.shift())
 end
 
+#Returns an array with first element on the last place of given array
 def left_shift(arr)
     new_arr = Array.new arr
    
     return left_shift!(new_arr)
 end
 
-
+#Returns an array where first half from elements of even indexes of given array, second half - elements of odd indexes of given array 
 def even_odd_array(arr)
     new_arr = Array.new arr
     
@@ -45,7 +46,7 @@ def even_odd_array(arr)
 
 end
 
-
+#Replaces output_list1 with uniq items of list and output_list2 with count of nums from output_list1 in list
 def method5(list, output_list1, output_list2)
     output_list1 = Array.new list
     output_list1.uniq!()
