@@ -2,6 +2,16 @@ class Student
 
     attr_accessor :id, :name, :surname, :patronymic, :phone, :telegram_username, :email, :github_username
 
+    def phone= value
+
+        if valid_phone?(value)
+            @phone = value
+        else
+            raise StandartError.new "Phone in uncorrect format"
+        end
+        
+    end
+
     def initialize(id:nil, name:, surname:, patronymic:, phone:nil, telegram_username:nil, email:nil, github_username:nil)
         self.id = id
         self.name = name
@@ -24,6 +34,13 @@ class Student
 		github_username ="GITHUB_USERNAME:#{self.github_username}; "
 
         return [id, surname, name, patronymic, phone, telegram_username, email, github_username].compact.join
+    end
+
+    def valid_phone?(phone)
+
+        valid_reg = \d{11}
+        return phone =~ valid_reg
+
     end
 
 end
