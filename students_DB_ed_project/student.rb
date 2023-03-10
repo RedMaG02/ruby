@@ -124,58 +124,59 @@ class Student
 		github_username ="GITHUB_USERNAME:#{self.github_username}; "
 
         return [id, surname, name, patronymic, phone, telegram_username, email, github_username].compact.join
+
     end
 
-    def valid_phone?(value)
+    def self.valid_phone?(value)
 
         valid_reg = /\d{11}/
         return value =~ valid_reg
 
     end
 
-    def valid_name?(value)
+    def self.valid_name?(value)
 
         valid_reg = /^[а-яА-Яa-zA-Z]+$/
         return value =~ valid_reg
 
     end
 
-    def valid_surname?(value)
+    def self.valid_surname?(value)
 
         valid_reg = /^[а-яА-Яa-zA-Z]+$/
         return value =~ valid_reg
 
     end
 
-    def valid_patronymic?(value)
+    def self.valid_patronymic?(value)
 
         valid_reg = /^[а-яА-Яa-zA-Z]+$/
         return value =~ valid_reg
 
     end
 
-    def valid_telegram_username?(value)
+    def self.valid_telegram_username?(value)
 
         valid_reg = /^\@[a-zA-Z]([a-zA-Z]|\d|_){4,32}$/
         return value =~ valid_reg
 
     end
 
-    def valid_github_username?(value)
+    def self.valid_github_username?(value)
 
         valid_reg = /^[a-zA-Z0-9]+$/
         return value =~ valid_reg
 
     end
 
-    def valid_email?(value)
+    def self.valid_email?(value)
 
         valid_reg = /^[a-zA-Z0-9._]+\@[a-zA-Z0-9.]+\.[a-z]+$/
         return value =~ valid_reg
 
     end
 
-    def valid_id?(value)
+    def self.valid_id?(value)
 
         valid_reg = /\d+/
         return value =~ valid_reg
@@ -188,13 +189,13 @@ class Student
 
     def contact_exist?
         contacts = [self.telegram_username, self.phone, seld.email]
-        contacts.each{|contact| if !contact.nil? return true end}
+        contacts.each{|contact| if !contact.nil? then (return true) end}
         return false
     end
 
     #Returns true if exists github_username and any contact
     def validate?
-        return github_username_exist? and contact_exist?
+        return (github_username_exist? and contact_exist?)
     end
 
     # sets email, phone, telegram_username values. Ignores nil values.
