@@ -192,7 +192,15 @@ class Student
         return false
     end
 
+    #Returns true if exists github_username and any contact
     def validate?
         return github_username_exist? and contact_exist?
+    end
+
+    # sets email, phone, telegram_username values. Ignores nil values.
+    def set_contacts!(email:nil, phone:nil, telegram_username:nil)
+        self.email = email if !email.nil?
+        self.phone = phone if !phone.nil? 
+        self.telegram_username = telegram_username if !telegram_username.nil? 
     end
 end
