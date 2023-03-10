@@ -4,20 +4,28 @@ class Student
 
     def phone= value
 
-        if valid_phone?(value)
-            @phone = value
+        if value != nil
+            if valid_phone?(value)
+                @phone = value
+            else
+                raise ArgumentError.new("phone in uncorrect format")
+            end
         else
-            raise StandartError.new "phone in uncorrect format"
+            @phone = nil
         end
 
     end
 
     def id= value
 
-        if valid_id?(value)
-            @id = value
+        if value != nil
+            if valid_id?(value)
+                @id = value
+            else
+                raise ArgumentError.new("id in uncorrect format")
+            end
         else
-            raise StandartError.new "id in uncorrect format"
+            @id = nil
         end
 
     end
@@ -27,7 +35,7 @@ class Student
         if valid_name?(value)
             @name = value
         else
-            raise StandartError.new "name in uncorrect format"
+            raise ArgumentError.new("name in uncorrect format")
         end
 
     end
@@ -37,7 +45,7 @@ class Student
         if valid_surname?(value)
             @surname = value
         else
-            raise StandartError.new "surname in uncorrect format"
+            raise ArgumentError.new("surname in uncorrect format")
         end
 
     end
@@ -47,37 +55,49 @@ class Student
         if valid_patronymic?(value)
             @patronymic = value
         else
-            raise StandartError.new "patronymic in uncorrect format"
+            raise ArgumentError.new("patronymic in uncorrect format") 
         end
 
     end
 
     def telegram_username= value
 
-        if valid_telegram_username?(value)
-            @telegram_username = value
+        if value != nil
+            if valid_telegram_username?(value)
+                @telegram_username = value
+            else
+                raise ArgumentError.new("telegram_username in uncorrect format")
+            end
         else
-            raise StandartError.new "telegram_username in uncorrect format"
-        end
+            @telegram_username = nil  
+        end  
 
     end
 
     def email= value
 
-        if valid_email?(value)
-            @email = value
+        if value != nil
+            if valid_email?(value)
+                @email = value
+            else
+                raise ArgumentError.new("email in uncorrect format")
+            end
         else
-            raise StandartError.new "email in uncorrect format"
+            @email = nil  
         end
 
     end
 
     def github_username= value
 
-        if valid_github_username?(value)
-            @github_username = value
+        if value != nil
+            if valid_github_username?(value)
+                @github_username = value
+            else
+                raise ArgumentError.new("github_username in uncorrect format")
+            end
         else
-            raise StandartError.new "github_username in uncorrect format"
+            @github_username = nil  
         end
 
     end
@@ -108,7 +128,7 @@ class Student
 
     def valid_phone?(value)
 
-        valid_reg = \d{11}
+        valid_reg = /\d{11}/
         return value =~ valid_reg
 
     end
@@ -157,9 +177,22 @@ class Student
 
     def valid_id?(value)
 
-        valid_reg = \d+
+        valid_reg = /\d+/
         return value =~ valid_reg
 
     end
 
+    def github_username_exist?
+        return !self.github_username.nil?
+    end
+
+    def contact_exist?
+        contacts = [self.telegram_username, self.phone, seld.email]
+        contacts.each{|contact| if !contact.nil? return true end}
+        return false
+    end
+
+    def validate?
+        return github_username_exist? and contact_exist?
+    end
 end
