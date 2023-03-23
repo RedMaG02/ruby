@@ -107,10 +107,11 @@ class Student
         self.name = name
         self.surname = surname
         self.patronymic = patronymic
-        self.phone = phone
-        self.telegram_username = telegram_username
-        self.email = email
+        #self.phone = phone
+        #self.telegram_username = telegram_username
+        #self.email = email
         self.github_username = github_username
+        self.set_contacts!(phone: phone, telegram_username: telegram_username, email: email)
     end
 
     def to_s
@@ -205,6 +206,8 @@ class Student
         self.telegram_username = telegram_username unless telegram_username.nil?
     end
 
+
+    #TODO: dont need it in Student class, make another class
     #Returns hash from object of class Student in string form. *For constructor
     def self.parse_object_string(str)
         raise ArgumentError.new("Must be string") unless str.is_a? String
@@ -212,7 +215,7 @@ class Student
         fields_for_parsing = [:id, :name, :surname, :patronymic, :phone, :telegram_username, :email, :github_username]
 
         raise ArgumentError.new("Wrong number of fields") unless tokens.size == fields_for_parsing.size
-        tokens.last.chomp!("$")
+        #tokens.last.chomp!("$")
 
         pair_array = tokens.map  { |field|
             pair = field.split(":")
@@ -225,8 +228,43 @@ class Student
         return pair_array.to_h
     end
 
+    #Constructor from string
     def self.student_from_string_ctor(obj)
         hash_obj = Student.parse_object_string(obj)
         Student.new(**hash_obj)
     end
+
+    #Returns str[0] + "." Like: str = "Arseniy" -> "A."
+    def self.get_initials(str)
+        return str[0] + "."
+    end
+
+    #Returns github_username or "NO_GIT" if github_username doesnt exist
+    def get_github_username
+        if github_username_exist? then
+            return self.github_username
+        else
+            return "NO_GIT"
+        end
+    end
+
+    #Returns string: "contact_name:value" with first(in contacts Array) existing contact, if contacts doesnt exist returns "NO_CONTACTS"
+    def get_contact
+        if contact_exist? then
+            contacts = [self.telegram_username, self.phone, self.email]
+            contacts_names = ["telegram_username", "phone", "email"]
+            contacts.each_index { |index| unless contacts[index].nil? then return "#{contacts_names[index]}:#{contacts} " end}
+        else
+            return "NO_CONTACTS"
+        end
+    end
+    #Returns string with surname, initials of name and patronymic, github_username and 1 contact, like: "SURNAME M.N. @github phone:79959949596"
+    def get_info
+        info = "#{self.surname} #{get_initials(self.name)}#{get_initials(self.patronymic)} "
+        info += get_github_username + " "
+        info += get_contact
+        return info
+
+    end
+
 end
