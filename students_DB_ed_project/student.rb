@@ -1,5 +1,6 @@
-class Student
-  extend(parser)
+require "basic_student.rb"
+class Student < BasicStudent
+
 
     attr_reader :id, :name, :surname, :patronymic, :phone, :telegram_username, :email, :github_username
 
@@ -13,20 +14,6 @@ class Student
             end
         else
             @phone = nil
-        end
-
-    end
-
-    def id=(value)
-
-        if value != nil
-            if Student.valid_id?(value)
-                @id = value
-            else
-                raise ArgumentError.new("id in wrong format")
-            end
-        else
-            @id = nil
         end
 
     end
@@ -89,20 +76,6 @@ class Student
 
     end
 
-    def github_username=(value)
-
-        if value != nil
-            if Student.valid_github_username?(value)
-                @github_username = value
-            else
-                raise ArgumentError.new("github_username in wrong format")
-            end
-        else
-            @github_username = nil
-        end
-
-    end
-
     def initialize(id:nil, name:, surname:, patronymic:, phone:nil, telegram_username:nil, email:nil, github_username:nil)
         self.id = id
         self.name = name
@@ -129,65 +102,6 @@ class Student
 
     end
 
-    def self.valid_phone?(value)
-
-        valid_reg = /\d{11}/
-        return value =~ valid_reg
-
-    end
-
-    def self.valid_name?(value)
-
-        valid_reg = /^[а-яА-Яa-zA-Z]+$/
-        return value =~ valid_reg
-
-    end
-
-    def self.valid_surname?(value)
-
-        valid_reg = /^[а-яА-Яa-zA-Z]+$/
-        return value =~ valid_reg
-
-    end
-
-    def self.valid_patronymic?(value)
-
-        valid_reg = /^[а-яА-Яa-zA-Z]+$/
-        return value =~ valid_reg
-
-    end
-
-    def self.valid_telegram_username?(value)
-
-        valid_reg = /^\@[a-zA-Z]([a-zA-Z]|\d|_){4,32}$/
-        return value =~ valid_reg
-
-    end
-
-    def self.valid_github_username?(value)
-
-        valid_reg = /^[a-zA-Z0-9]+$/
-        return value =~ valid_reg
-
-    end
-
-    def self.valid_email?(value)
-
-        valid_reg = /^[a-zA-Z0-9._]+\@[a-zA-Z0-9.]+\.[a-z]+$/
-        return value =~ valid_reg
-
-    end
-
-    def self.valid_id?(value)
-
-        valid_reg = /\d+/
-        return value =~ valid_reg
-
-    end
-
-    def github_username_exist?
-        return !self.github_username.nil?
-    end
 
     def contact_exist?
         contacts = [self.telegram_username, self.phone, self.email]

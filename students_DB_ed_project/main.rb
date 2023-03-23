@@ -1,4 +1,5 @@
 require_relative "student"
+require_relative "basic_student"
 
 student1 = Student.new id:"1", name: "Александр", surname: "Пушкин", patronymic: "Сергеевич"
 student2 = Student.new id:"2", name: "Александр", surname: "Мищенко", patronymic: "Николаевич", phone: "79334523547"

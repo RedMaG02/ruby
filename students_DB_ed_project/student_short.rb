@@ -1,29 +1,31 @@
-class StudentShort
-  extend(Parser)
+require "basic_student.rb"
+class StudentShort < BasicStudent
   require_relative "Student"
 
   attr_reader :id, :surname_with_initials, :github_username, :contact
-  attr_writer :id, :surname_with_initials, :github_username, :contact
+
 
   def id=(value)
     if @id == nil
-      if Student.valid_id?(value)
+      if BasicStudent.valid_id?(value)
         @id = value
       else
         raise ArgumentError.new("id in wrong format")
       end
+    end
   end
 
   def github_username=(value)
 
     if @github_username == nil
-      if Student.valid_github_username?(value)
+      if BasicStudent.valid_github_username?(value)
         @github_username = value
       else
         raise ArgumentError.new("github_username in wrong format")
       end
 
     end
+  end
 
     def surname_with_initials=(value)
       if @surname_with_initials == nil
@@ -32,6 +34,7 @@ class StudentShort
         else
           raise ArgumentError.new("surname_with_initials in wrong format")
         end
+end
     end
 
     def self.valid_surname_with_initials?(value)
@@ -42,8 +45,6 @@ class StudentShort
     end
 
     def contact=(value)
-      
-    end
       if @contact == nil
         contact_pair = value.split("-")
         contact_pair[0].to_sym
@@ -51,8 +52,8 @@ class StudentShort
         hash[contact_pair[0]].call(contact_pair[1])
         @contact = "#{contact_pair[0]}:#{contact_pair[1]}"
       end
-
     end
+
 
 
 
