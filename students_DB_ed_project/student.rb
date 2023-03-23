@@ -223,7 +223,7 @@ class Student
         if github_username_exist? then
             return self.github_username
         else
-            return "NO_GIT"
+            raise StandardError.new("GIT DOES NOT EXIST") #I dont know what to do
         end
     end
 
@@ -232,16 +232,17 @@ class Student
         if contact_exist? then
             contacts = [self.telegram_username, self.phone, self.email]
             contacts_names = ["telegram_username", "phone", "email"]
-            contacts.each_index { |index| unless contacts[index].nil? then return "#{contacts_names[index]}:#{contacts}" end}
+            contacts.each_index { |index| unless contacts[index].nil? then return "contact:#{contacts_names[index]}-#{contacts}" end}
         else
-            return "NO_CONTACTS"
+            raise StandardError.new("GIT DOES NOT EXIST") #I dont know what to do
         end
     end
-    #Returns string with surname, initials of name and patronymic, github_username and 1 contact, like: "SURNAME M.N. @github phone:79959949596"
+
+    #Returns string with surname, initials of name and patronymic, github_username and 1 contact, like: "surname_In1_In2:SURNAME M.N.;@github;phone:79959949596"
     def get_info
-        info = "surname_In1_In2:#{self.surname} #{get_initials(self.name)}#{get_initials(self.patronymic)};"
+        info = "surname_with_initials:#{self.surname} #{get_initials(self.name)}#{get_initials(self.patronymic)};"
         info += "github_username:#{get_github_username};"
-        info += get_contact + ";"
+        info += get_contact
         return info
 
     end
