@@ -1,14 +1,14 @@
 class Student
 
-    attr_accessor :id, :name, :surname, :patronymic, :phone, :telegram_username, :email, :github_username
+    attr_reader :id, :name, :surname, :patronymic, :phone, :telegram_username, :email, :github_username
 
-    def phone= value
+    def phone=(value)
 
         if value != nil
-            if valid_phone?(value)
+            if Student.valid_phone?(value)
                 @phone = value
             else
-                raise ArgumentError.new("phone in uncorrect format")
+                raise ArgumentError.new("phone in wrong format")
             end
         else
             @phone = nil
@@ -16,13 +16,13 @@ class Student
 
     end
 
-    def id= value
+    def id=(value)
 
         if value != nil
-            if valid_id?(value)
+            if Student.valid_id?(value)
                 @id = value
             else
-                raise ArgumentError.new("id in uncorrect format")
+                raise ArgumentError.new("id in wrong format")
             end
         else
             @id = nil
@@ -30,74 +30,74 @@ class Student
 
     end
 
-    def name= value
+    def name=(value)
 
-        if valid_name?(value)
+        if Student.valid_name?(value)
             @name = value
         else
-            raise ArgumentError.new("name in uncorrect format")
+            raise ArgumentError.new("name in wrong format")
         end
 
     end
 
-    def surname= value
+    def surname=(value)
 
-        if valid_surname?(value)
+        if Student.valid_surname?(value)
             @surname = value
         else
-            raise ArgumentError.new("surname in uncorrect format")
+            raise ArgumentError.new("surname in wrong format")
         end
 
     end
 
-    def patronymic= value
+    def patronymic=(value)
 
-        if valid_patronymic?(value)
+        if Student.valid_patronymic?(value)
             @patronymic = value
         else
-            raise ArgumentError.new("patronymic in uncorrect format") 
+            raise ArgumentError.new("patronymic in wrong format")
         end
 
     end
 
-    def telegram_username= value
+    def telegram_username=(value)
 
         if value != nil
-            if valid_telegram_username?(value)
+            if Student.valid_telegram_username?(value)
                 @telegram_username = value
             else
-                raise ArgumentError.new("telegram_username in uncorrect format")
+                raise ArgumentError.new("telegram_username in wrong format")
             end
         else
-            @telegram_username = nil  
-        end  
-
-    end
-
-    def email= value
-
-        if value != nil
-            if valid_email?(value)
-                @email = value
-            else
-                raise ArgumentError.new("email in uncorrect format")
-            end
-        else
-            @email = nil  
+            @telegram_username = nil
         end
 
     end
 
-    def github_username= value
+    def email=(value)
 
         if value != nil
-            if valid_github_username?(value)
-                @github_username = value
+            if Student.valid_email?(value)
+                @email = value
             else
-                raise ArgumentError.new("github_username in uncorrect format")
+                raise ArgumentError.new("email in wrong format")
             end
         else
-            @github_username = nil  
+            @email = nil
+        end
+
+    end
+
+    def github_username=(value)
+
+        if value != nil
+            if Student.valid_github_username?(value)
+                @github_username = value
+            else
+                raise ArgumentError.new("github_username in wrong format")
+            end
+        else
+            @github_username = nil
         end
 
     end
@@ -157,7 +157,7 @@ class Student
 
     def self.valid_telegram_username?(value)
 
-        valid_reg = /^\@[a-zA-Z]([a-zA-Z]|\d|_){4,32}$/
+        valid_reg = /^[a-zA-Z]([a-zA-Z]|\d|_){4,32}$/
         return value =~ valid_reg
 
     end
@@ -171,7 +171,7 @@ class Student
 
     def self.valid_email?(value)
 
-        valid_reg = /^[a-zA-Z0-9._]+\@[a-zA-Z0-9.]+\.[a-z]+$/
+        valid_reg = /^[a-zA-Z0-9._]+[a-zA-Z0-9.]+\.[a-z]+$/
         return value =~ valid_reg
 
     end
@@ -188,8 +188,8 @@ class Student
     end
 
     def contact_exist?
-        contacts = [self.telegram_username, self.phone, seld.email]
-        contacts.each{|contact| if !contact.nil? then (return true) end}
+        contacts = [self.telegram_username, self.phone, self.email]
+        contacts.each{|contact| unless contact.nil? then (return true) end}
         return false
     end
 
@@ -200,8 +200,8 @@ class Student
 
     # sets email, phone, telegram_username values. Ignores nil values.
     def set_contacts!(email:nil, phone:nil, telegram_username:nil)
-        self.email = email if !email.nil?
-        self.phone = phone if !phone.nil? 
-        self.telegram_username = telegram_username if !telegram_username.nil? 
+        self.email = email unless email.nil?
+        self.phone = phone unless phone.nil?
+        self.telegram_username = telegram_username unless telegram_username.nil?
     end
 end
