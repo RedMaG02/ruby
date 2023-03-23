@@ -1,4 +1,5 @@
 class Student
+  extend(parser)
 
     attr_reader :id, :name, :surname, :patronymic, :phone, :telegram_username, :email, :github_username
 
@@ -206,31 +207,9 @@ class Student
         self.telegram_username = telegram_username unless telegram_username.nil?
     end
 
-
-    #TODO: dont need it in Student class, make another class
-    #Returns hash from object of class Student in string form. *For constructor
-    def self.parse_object_string(str)
-        raise ArgumentError.new("Must be string") unless str.is_a? String
-        tokens = str.split(";")
-        fields_for_parsing = [:id, :name, :surname, :patronymic, :phone, :telegram_username, :email, :github_username]
-
-        raise ArgumentError.new("Wrong number of fields") unless tokens.size == fields_for_parsing.size
-        #tokens.last.chomp!("$")
-
-        pair_array = tokens.map  { |field|
-            pair = field.split(":")
-            pair[0] = pair[0].to_sym
-            if pair[1] == "" then pair[1] = nil end
-            pair}
-
-        pair_array.each { |pair| raise ArgumentError.new("Wrong field name")  unless fields_for_parsing.include?(pair[0])}
-
-        return pair_array.to_h
-    end
-
     #Constructor from string
     def self.student_from_string_ctor(obj)
-        hash_obj = Student.parse_object_string(obj)
+        hash_obj = Parser.parse(obj, ";", ":", [:id, :name, :surname, :patronymic, :phone, :telegram_username, :email, :github_username])
         Student.new(**hash_obj)
     end
 
@@ -253,16 +232,16 @@ class Student
         if contact_exist? then
             contacts = [self.telegram_username, self.phone, self.email]
             contacts_names = ["telegram_username", "phone", "email"]
-            contacts.each_index { |index| unless contacts[index].nil? then return "#{contacts_names[index]}:#{contacts} " end}
+            contacts.each_index { |index| unless contacts[index].nil? then return "#{contacts_names[index]}:#{contacts}" end}
         else
             return "NO_CONTACTS"
         end
     end
     #Returns string with surname, initials of name and patronymic, github_username and 1 contact, like: "SURNAME M.N. @github phone:79959949596"
     def get_info
-        info = "#{self.surname} #{get_initials(self.name)}#{get_initials(self.patronymic)} "
-        info += get_github_username + " "
-        info += get_contact
+        info = "surname_In1_In2:#{self.surname} #{get_initials(self.name)}#{get_initials(self.patronymic)};"
+        info += "github_username:#{get_github_username};"
+        info += get_contact + ";"
         return info
 
     end
