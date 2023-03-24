@@ -1,0 +1,4 @@
+id:1;surname:Пушкин;name:Александр;patronymic:Сергеевич;phone:;telegram_username:;email:;github_username:
+id:2;surname:Мищенко;name:Александр;patronymic:Николаевич;phone:79334523547;telegram_username:;email:;github_username:
+id:3;surname:Нагалевский;name:Артем;patronymic:Михайлович;phone:79334523548;telegram_username:@nullexpdirector;email:nullexp@mail.ru;github_username:nullexpdirector
+id:4;surname:Нагалевскийc;name:Артемc;patronymic:Михайловичc;phone:79334523544;telegram_username:;email:;github_username:

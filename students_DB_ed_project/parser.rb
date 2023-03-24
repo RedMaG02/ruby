@@ -8,14 +8,13 @@ module Parser
   def parse(str:, separator:" ", pair_separator:";", fields_for_parsing:)
     raise ArgumentError.new("Must be string") unless str.is_a? String
     tokens = str.split(separator)
-
     raise ArgumentError.new("Wrong number of fields") unless tokens.size == fields_for_parsing.size
 
     pair_array = tokens.map  { |field|
       pair = field.split(pair_separator)
       pair[0] = pair[0].to_sym
-      if pair[1] == "" then pair[1] = nil end
       pair}
+    pair_array.each{|pair| if pair.size == 1 then pair.append(nil) end}
 
     pair_array.each { |pair| raise ArgumentError.new("Wrong field name")  unless fields_for_parsing.include?(pair[0])}
 
@@ -23,8 +22,9 @@ module Parser
   end
 
   #Returns array of strings from txt file splitted with separator
-  def parse_txt(file: , separator: "\r\n")
-    text = File.open(file, "r")
+  def parse_txt(file: , separator: "\n")
+    file = File.open(file, "r")
+    text = file.read
     str_array = text.split(separator)
     return str_array
   end

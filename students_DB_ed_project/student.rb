@@ -159,4 +159,10 @@ class Student < BasicStudent
 
     end
 
+    def self.read_from_txt_ctor(file:)
+        obj_str_array = parse_txt(file:file)
+        student_obj_array = obj_str_array.map{|obj| Student.student_from_string_ctor(obj)}
+        return student_obj_array
+    end
+
 end
