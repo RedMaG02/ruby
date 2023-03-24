@@ -49,7 +49,7 @@ end
         contact_pair = value.split("-")
         contact_pair[0].to_sym
         hash = {telegram_username: BasicStudent.valid_telegram_username?(contact_pair[1]), phone: BasicStudent.valid_phone?(contact_pair[1]), email: BasicStudent.valid_email?(contact_pair[1])}
-        hash[contact_pair[0]].call(contact_pair[1])
+        hash[contact_pair[0]].call(contact_pair[1]) #I hope it works...
         @contact = "#{contact_pair[0]}:#{contact_pair[1]}"
       end
     end

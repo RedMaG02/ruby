@@ -1,4 +1,5 @@
 require_relative "basic_student"
+#TODO Do something with separators in to_s, write_to_txt, read_from_txt_ctor
 class Student < BasicStudent
     attr_reader  :name, :surname, :patronymic, :phone, :telegram_username, :email
 
