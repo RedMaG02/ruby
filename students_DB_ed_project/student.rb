@@ -1,8 +1,6 @@
-require "basic_student.rb"
+require_relative "basic_student"
 class Student < BasicStudent
-
-
-    attr_reader :id, :name, :surname, :patronymic, :phone, :telegram_username, :email, :github_username
+    attr_reader  :name, :surname, :patronymic, :phone, :telegram_username, :email
 
     def phone=(value)
 
@@ -123,7 +121,7 @@ class Student < BasicStudent
 
     #Constructor from string
     def self.student_from_string_ctor(obj)
-        hash_obj = Parser.parse(obj, ";", ":", [:id, :name, :surname, :patronymic, :phone, :telegram_username, :email, :github_username])
+        hash_obj = parse(str:obj, separator:";", pair_separator: ":", fields_for_parsing: [:id, :name, :surname, :patronymic, :phone, :telegram_username, :email, :github_username])
         Student.new(**hash_obj)
     end
 
