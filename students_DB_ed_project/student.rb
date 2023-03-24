@@ -165,4 +165,9 @@ class Student < BasicStudent
         return student_obj_array
     end
 
+    def self.write_to_txt(file:, students_array:)
+        students_string_array = students_array.map {|student| student.to_s}
+        write_txt(file:file, string_array:students_string_array)
+    end
+
 end

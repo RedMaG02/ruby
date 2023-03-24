@@ -24,4 +24,5 @@ pair_array = tokens.map  { |field|
 
 puts(pair_array[0][0])
 
-puts(Student.read_from_txt_ctor(file:"test.txt"))
+Student.write_to_txt(file:"write_test.txt", students_array:Student.read_from_txt_ctor(file:"test.txt"))
+puts(Student.read_from_txt_ctor(file:"write_test.txt"))

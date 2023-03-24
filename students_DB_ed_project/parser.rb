@@ -26,11 +26,12 @@ module Parser
     file = File.open(file, "r")
     text = file.read
     str_array = text.split(separator)
+    file.close
     return str_array
   end
 
   #Appends to given file strings from array with separator between them, doesnt append separator after last string, if file is not empty - appends separator before first string
-  def write_txt(file: , separator: "/n" ,string_array:)
+  def write_txt(file: , separator: "\n" ,string_array:)
     file_text = File.open(file, "a")
 
     unless File.empty?(file_text)
@@ -38,11 +39,12 @@ module Parser
     end
 
     string_array.each_index {|index|
-      if index != string_array.size-1 then
+      if index != string_array.size-1
         file_text.write("#{string_array[index]}#{separator}")
       else
         file_text.write("#{string_array[index]}")
       end}
+    file_text.close
   end
 
 end
