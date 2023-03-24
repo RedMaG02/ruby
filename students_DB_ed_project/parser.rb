@@ -22,4 +22,11 @@ module Parser
     return pair_array.to_h
   end
 
+  #Returns array of strings from txt file splitted with separator
+  def parse_txt(file: , separator: "\r\n")
+    text = File.open(file, "r")
+    str_array = text.split(separator)
+    return str_array
+  end
+
 end

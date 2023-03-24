@@ -1,7 +1,8 @@
-require_relative "parser"
-extend(Parser)
 class BasicStudent
+  require_relative "parser"
+  extend(Parser)
   attr_reader :id, :github_username
+
   def id=(value)
 
     if value != nil

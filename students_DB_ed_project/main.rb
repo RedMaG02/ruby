@@ -1,5 +1,7 @@
 require_relative "student"
 require_relative "basic_student"
+require_relative "parser"
+extend(Parser)
 
 student1 = Student.new id:"1", name: "Александр", surname: "Пушкин", patronymic: "Сергеевич"
 student2 = Student.new id:"2", name: "Александр", surname: "Мищенко", patronymic: "Николаевич", phone: "79334523547"
@@ -21,3 +23,5 @@ pair_array = tokens.map  { |field|
   pair}
 
 puts(pair_array[0][0])
+
+puts parse_txt(file:"chingChong", separator: ":")
