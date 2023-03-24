@@ -94,7 +94,7 @@ class Student < BasicStudent
 		    phone ="phone:#{self.phone};"
 		    telegram_username ="telegram_username:#{self.telegram_username};"
 		    email ="email:#{self.email};"
-		    github_username ="github_username:#{self.github_username}$"
+		    github_username ="github_username:#{self.github_username}"
 
         return [id, surname, name, patronymic, phone, telegram_username, email, github_username].join
 
