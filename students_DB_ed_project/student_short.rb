@@ -2,6 +2,7 @@ require_relative "basic_student"
 require_relative "Student"
 class StudentShort < BasicStudent
 
+  private
   attr_reader  :surname_with_initials, :contact
 
 
@@ -55,6 +56,7 @@ end
     end
 
 
+  public
   def initialize(id:nil, str:)
     self.id = id
     hash = parse(str: obj, separator:";", pair_separator:":", fields_for_parsing:[:surname_with_initials,:github_username, :contact])

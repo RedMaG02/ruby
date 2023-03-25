@@ -45,6 +45,7 @@ module Parser
         file_text.write("#{string_array[index]}")
       end}
     file_text.close
+    nil
   end
 
 end
