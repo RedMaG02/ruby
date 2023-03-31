@@ -15,7 +15,9 @@ class DataList
   end
 
   def get_selected
-    return self.selected
+    temp = self.selected
+    self.selected = []
+    return temp
   end
 
   def get_names
