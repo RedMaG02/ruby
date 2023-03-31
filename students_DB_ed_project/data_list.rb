@@ -1,10 +1,10 @@
 class DataList
   private
-  attr_writer :list
-
-  public
   attr_reader :list
   attr_accessor :selected
+
+  public
+  attr_writer :list
   def initialize(list:)
     self.list = list
   end
