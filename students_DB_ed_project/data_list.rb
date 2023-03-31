@@ -2,7 +2,7 @@ class DataList
   private
   attr_writer :list
 
-  protected
+  public
   attr_reader :list
   attr_accessor :selected
   def initialize(list:)
@@ -21,9 +21,22 @@ class DataList
   end
 
   def get_names
+    return ["№", **get_objects_attr_names]
   end
 
   def get_data
+    table = []
+    counter = 0
+    list.each { |obj| table.append(get_objects_attr); counter += 1}
+    return DataTable.new(table: table)
   end
+
+  protected
+
+  def get_objects_attr()
+  end
+  def get_objects_attr_names()
+  end
+
 
 end
