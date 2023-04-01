@@ -145,15 +145,16 @@ class Student < BasicStudent
         if contact_exist? then
             contacts = [self.telegram_username, self.phone, self.email]
             contacts_names = ["telegram_username", "phone", "email"]
-            contacts.each_index { |index| unless contacts[index].nil? then return "contact:#{contacts_names[index]}-#{contacts}" end}
+            contacts.each_index { |index| unless contacts[index].nil? then return "contact:#{contacts_names[index]}-#{contacts[index]}" end}
         else
             raise StandardError.new("GIT DOES NOT EXIST") #I dont know what to do
         end
+
     end
 
     #Returns string with surname, initials of name and patronymic, github_username and 1 contact, like: "surname_In1_In2:SURNAME M.N.;@github;phone:79959949596"
     def get_info
-        info = "surname_with_initials:#{self.surname} #{get_initials(self.name)}#{get_initials(self.patronymic)};"
+        info = "surname_with_initials:#{self.surname} #{Student.get_initials(self.name)}#{Student.get_initials(self.patronymic)};"
         info += "github_username:#{get_github_username};"
         info += get_contact
         return info

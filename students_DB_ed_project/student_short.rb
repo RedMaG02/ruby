@@ -1,9 +1,9 @@
 require_relative "basic_student"
-require_relative "Student"
+require_relative "student"
 class StudentShort < BasicStudent
 
-  private
   attr_reader  :surname_with_initials, :contact
+  private
 
 
   def id=(value)
@@ -48,10 +48,10 @@ end
     def contact=(value)
       if @contact == nil
         contact_pair = value.split("-")
-        contact_pair[0].to_sym
         hash = {telegram_username: BasicStudent.valid_telegram_username?(contact_pair[1]), phone: BasicStudent.valid_phone?(contact_pair[1]), email: BasicStudent.valid_email?(contact_pair[1])}
-        hash[contact_pair[0]].call(contact_pair[1]) #I hope it works...
+        if hash[contact_pair[0].to_sym] #I hope it works...
         @contact = "#{contact_pair[0]}:#{contact_pair[1]}"
+        end
       end
     end
 
@@ -59,7 +59,7 @@ end
   public
   def initialize(id:nil, str:)
     self.id = id
-    hash = parse(str: obj, separator:";", pair_separator:":", fields_for_parsing:[:surname_with_initials,:github_username, :contact])
+    hash = BasicStudent.parse(str: str, separator:";", pair_separator:":", fields_for_parsing:[:surname_with_initials,:github_username, :contact])
     self.github_username = hash[:github_username]
     self.surname_with_initials = hash[:surname_with_initials]
     self.contact = hash[:contact]

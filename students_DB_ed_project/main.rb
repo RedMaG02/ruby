@@ -1,6 +1,8 @@
 require_relative "student"
 require_relative "basic_student"
 require_relative "parser"
+require_relative 'student_short'
+require_relative 'data_list_student_short'
 extend(Parser)
 
 #student1 = Student.new id:"1", name: "Александр", surname: "Пушкин", patronymic: "Сергеевич"
@@ -14,15 +16,27 @@ extend(Parser)
 
 #puts student1.surname.nil?
 
-tokens = ["one:1", "two:2"]
+#tokens = ["one:1", "two:2"]
 
-pair_array = tokens.map  { |field|
-  pair = field.split(":")
-  pair[0] = pair[0].to_sym()
-  if pair[1] == "" then pair[1] = nil end
-  pair}
+#pair_array = tokens.map  { |field|
+#  pair = field.split(":")
+#  pair[0] = pair[0].to_sym()
+#  if pair[1] == "" then pair[1] = nil end
+#  pair}
 
-puts(pair_array[0][0])
+#puts(pair_array[0][0])
 
-Student.write_to_txt(file:"write_test.txt", students_array:Student.read_from_txt_ctor(file:"test.txt"))
-puts(Student.read_from_txt_ctor(file:"write_test.txt"))
+#Student.write_to_txt(file:"write_test.txt", students_array:Student.read_from_txt_ctor(file:"test.txt"))
+#puts(Student.read_from_txt_ctor(file:"write_test.txt"))
+
+stud1 = Student.student_from_string_ctor("id:3;surname:НагалевскиI;name:Артем;patronymic:Михайлович;phone:79334523548;telegram_username:@nullexpdirector;email:nullexp@mail.ru;github_username:nullexpdirector")
+stud2 = Student.student_from_string_ctor("id:4;surname:НагалевскийII;name:Артем;patronymic:Михайлович;phone:79334523548;telegram_username:@nullexpdirector;email:nullexp@mail.ru;github_username:nullexpdirector")
+stud3 = Student.student_from_string_ctor("id:5;surname:НагалевскийIII;name:Артем;patronymic:Михайлович;phone:79334523548;telegram_username:@nullexpdirector;email:nullexp@mail.ru;github_username:nullexpdirector")
+
+short_stud1 = StudentShort.from_student_ctor(stud1)
+short_stud2 = StudentShort.from_student_ctor(stud2)
+short_stud3 = StudentShort.from_student_ctor(stud3)
+
+list = DataListStudentShort.new(list: [short_stud1, short_stud2, short_stud3])
+puts(list.get_names)
+puts(list.get_data)

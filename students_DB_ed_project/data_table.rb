@@ -1,8 +1,9 @@
 class DataTable
   private
-  attr_accessor :table
+  attr_writer :table
 
   public
+  attr_reader :table
   def initialize(table:)
     self.table = table
   end

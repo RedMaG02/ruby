@@ -1,5 +1,5 @@
+require_relative "parser"
 class BasicStudent
-  require_relative "parser"
   extend(Parser)
   attr_reader :id, :github_username
 
