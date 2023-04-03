@@ -1,6 +1,7 @@
 require_relative "basic_student"
 #TODO Do something with separators in to_s, write_to_txt, read_from_txt_ctor
 class Student < BasicStudent
+    include Enumerable
     attr_reader  :name, :surname, :patronymic, :phone, :telegram_username, :email
 
     def phone=(value)
@@ -176,6 +177,16 @@ class Student < BasicStudent
         students_string_array = students_array.map {|student| student.to_s}
         write_txt(file:file, string_array:students_string_array)
         nil
+    end
+
+    def each(&block)
+        fields = [self.id, self.name, self.surname, self.patronymic, self.phone, self.github_username, self.email, self.telegram_username]
+        fields.each(&block)
+    end
+
+    def each_with_name(&block)
+        fields_with_names = {id: id, name: name, surname: surname, patronymic: patronymic, phone: phone, email: email, github_username: github_username, telegram_username:telegram_username}
+        fields_with_names.each(&block)
     end
 
 end

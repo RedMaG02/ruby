@@ -32,7 +32,7 @@ module Parser
 
   #Appends to given file strings from array with separator between them, doesnt append separator after last string, if file is not empty - appends separator before first string
   def write_txt(file: , separator: "\n" ,string_array:)
-    file_text = File.open(file, "a")
+    file_text = File.open(file, "w")
 
     unless File.empty?(file_text)
       file_text.write(separator)
