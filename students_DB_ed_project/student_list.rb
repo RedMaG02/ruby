@@ -1,9 +1,9 @@
-class BasicStudentList
+class StudentList
   require_relative 'data_list_student_short'
   require_relative 'student_short'
   require_relative 'student'
 
-  attr_accessor :list, :file
+  attr_accessor :list, :file, :format
 
   protected
   def initialize(file:)
@@ -12,9 +12,27 @@ class BasicStudentList
 
   public
   def read_student_list
+    file = File.open(self.file, "r")
+    text = file.read
+    hash_array = format.text_to_hash(text)
+    self.list = hash_array.map {|hash| Student.new(**hash)}
+    return nil
   end
 
   def write_student_list
+    #TODO move to function
+    hash_array = self.list.map do |stud|
+      arr = stud.map do |name, value|
+        [name.to_s, value]
+      end
+      arr.to_h
+    end
+
+    text = format.hash_to_format(hash_array)
+    file_text = File.open(file, "w")
+    file_text.write(text)
+    file_text.close
+    return nil
   end
 
   def get_student_by_id(id:)

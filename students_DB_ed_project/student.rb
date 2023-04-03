@@ -168,14 +168,14 @@ class Student < BasicStudent
     end
 
     def self.read_from_txt(file:)
-        obj_str_array = parse_txt(file:file)
+        obj_str_array = parse_txt_file(file:file)
         student_obj_array = obj_str_array.map{|obj| Student.student_from_string_ctor(obj)}
         return student_obj_array
     end
 
     def self.write_to_txt(file:, students_array:)
         students_string_array = students_array.map {|student| student.to_s}
-        write_txt(file:file, string_array:students_string_array)
+        write_txt_file(file:file, string_array:students_string_array)
         nil
     end
 

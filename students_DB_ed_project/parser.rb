@@ -22,30 +22,40 @@ module Parser
   end
 
   #Returns array of strings from txt file splitted with separator
-  def parse_txt(file: , separator: "\n")
+  def parse_txt_file(file:, separator: "\n")
     file = File.open(file, "r")
     text = file.read
-    str_array = text.split(separator)
+    str_array = parse_txt(str: text, separator: separator)
     file.close
     return str_array
   end
 
+  def parse_txt(str:, separator: "\n")
+    return  str.split(separator)
+  end
+
   #Appends to given file strings from array with separator between them, doesnt append separator after last string, if file is not empty - appends separator before first string
-  def write_txt(file: , separator: "\n" ,string_array:)
+  def write_txt_file(file:, separator: "\n", string_array:)
     file_text = File.open(file, "w")
 
-    unless File.empty?(file_text)
-      file_text.write(separator)
-    end
-
-    string_array.each_index {|index|
-      if index != string_array.size-1
-        file_text.write("#{string_array[index]}#{separator}")
-      else
-        file_text.write("#{string_array[index]}")
-      end}
+    #unless File.empty?(file_text)
+    #  file_text.write(separator)
+    # end
+    file_text.write(write_txt(separator: separator, string_array:string_array))
     file_text.close
     nil
+  end
+
+  def write_txt(separator: "\n", string_array:)
+
+    text = ""
+    string_array.each_index {|index|
+      if index != string_array.size-1
+        text += ("#{string_array[index]}#{separator}")
+      else
+        text += ("#{string_array[index]}")
+      end}
+    return text
   end
 
 end
