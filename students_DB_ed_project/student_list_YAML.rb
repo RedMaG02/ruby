@@ -1,7 +1,8 @@
-class StudentsListJSON
+class StudentsListYAML
   require_relative 'student'
   require_relative 'data_list_student_short'
   require_relative 'student_short'
+  require 'yaml'
 
   attr_accessor :list, :file
 
@@ -12,8 +13,8 @@ class StudentsListJSON
   def read_student_list
     file = File.open(self.file, "r")
     text = file.read
-    json_hash = JSON.parse(text)
-    self.list = json_hash.map {|hash| Student.new(**hash)}
+    yaml_hash = YAML.parse(text)
+    self.list = yaml_hash.map {|hash| Student.new(**hash)}
     return nil
   end
 
@@ -26,9 +27,9 @@ class StudentsListJSON
       arr.to_h
     end
 
-    json_text = JSON.pretty_generate(objects_array)
+    yaml_text = objects_array.to_yaml
     file_text = File.open(file, "w")
-    file_text.write(json_text)
+    file_text.write(yaml_text)
     file_text.close
     return nil
   end
