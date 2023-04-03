@@ -5,6 +5,7 @@ class DataList
 
   public
   attr_accessor :list
+
   def initialize(list:)
     self.list = list
   end
