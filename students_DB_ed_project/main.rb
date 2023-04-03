@@ -3,6 +3,7 @@ require_relative "basic_student"
 require_relative "parser"
 require_relative 'student_short'
 require_relative 'data_list_student_short'
+require_relative 'students_list_txt'
 extend(Parser)
 
 #student1 = Student.new id:"1", name: "Александр", surname: "Пушкин", patronymic: "Сергеевич"
@@ -29,14 +30,19 @@ extend(Parser)
 #Student.write_to_txt(file:"write_test.txt", students_array:Student.read_from_txt_ctor(file:"test.txt"))
 #puts(Student.read_from_txt_ctor(file:"write_test.txt"))
 
-stud1 = Student.student_from_string_ctor("id:3;surname:НагалевскиI;name:Артем;patronymic:Михайлович;phone:79334523548;telegram_username:@nullexpdirector;email:nullexp@mail.ru;github_username:nullexpdirector")
-stud2 = Student.student_from_string_ctor("id:4;surname:НагалевскийII;name:Артем;patronymic:Михайлович;phone:79334523548;telegram_username:@nullexpdirector;email:nullexp@mail.ru;github_username:nullexpdirector")
-stud3 = Student.student_from_string_ctor("id:5;surname:НагалевскийIII;name:Артем;patronymic:Михайлович;phone:79334523548;telegram_username:@nullexpdirector;email:nullexp@mail.ru;github_username:nullexpdirector")
+#stud1 = Student.student_from_string_ctor("id:3;surname:НагалевскиI;name:Артем;patronymic:Михайлович;phone:79334523548;telegram_username:@nullexpdirector;email:nullexp@mail.ru;github_username:nullexpdirector")
+#stud2 = Student.student_from_string_ctor("id:4;surname:НагалевскийII;name:Артем;patronymic:Михайлович;phone:79334523548;telegram_username:@nullexpdirector;email:nullexp@mail.ru;github_username:nullexpdirector")
+#stud3 = Student.student_from_string_ctor("id:5;surname:НагалевскийIII;name:Артем;patronymic:Михайлович;phone:79334523548;telegram_username:@nullexpdirector;email:nullexp@mail.ru;github_username:nullexpdirector")
 
-short_stud1 = StudentShort.from_student_ctor(stud1)
-short_stud2 = StudentShort.from_student_ctor(stud2)
-short_stud3 = StudentShort.from_student_ctor(stud3)
+#short_stud1 = StudentShort.from_student_ctor(stud1)
+#short_stud2 = StudentShort.from_student_ctor(stud2)
+#short_stud3 = StudentShort.from_student_ctor(stud3)
 
-list = DataListStudentShort.new(list: [short_stud1, short_stud2, short_stud3])
-puts(list.get_names)
-puts(list.get_data)
+#list = DataListStudentShort.new(list: [short_stud1, short_stud2, short_stud3])
+#puts(list.get_names)
+#puts(list.get_data)
+test = StudentsListTXT.new()
+list = test.read_student_list
+list.append("не пикачу")
+puts(list)
+puts(test.list)

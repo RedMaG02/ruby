@@ -7,7 +7,7 @@ class BasicStudent
 
     if value != nil
       if BasicStudent.valid_id?(value)
-        @id = value
+        @id = value.to_i
       else
         raise ArgumentError.new("id in wrong format")
       end

@@ -1,11 +1,10 @@
 require_relative 'data_table'
 class DataList
   private
-  attr_reader :list
   attr_accessor :selected
 
   public
-  attr_writer :list
+  attr_accessor :list
   def initialize(list:)
     self.list = list
   end

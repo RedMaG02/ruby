@@ -152,16 +152,21 @@ class Student < BasicStudent
 
     end
 
+    def get_surname_with_initials
+        return "#{self.surname} #{Student.get_initials(self.name)}#{Student.get_initials(self.patronymic)}"
+    end
+
+
     #Returns string with surname, initials of name and patronymic, github_username and 1 contact, like: "surname_In1_In2:SURNAME M.N.;@github;phone:79959949596"
     def get_info
-        info = "surname_with_initials:#{self.surname} #{Student.get_initials(self.name)}#{Student.get_initials(self.patronymic)};"
+        info = "surname_with_initials:#{get_surname_with_initials};"
         info += "github_username:#{get_github_username};"
         info += get_contact
         return info
 
     end
 
-    def self.read_from_txt_ctor(file:)
+    def self.read_from_txt(file:)
         obj_str_array = parse_txt(file:file)
         student_obj_array = obj_str_array.map{|obj| Student.student_from_string_ctor(obj)}
         return student_obj_array
