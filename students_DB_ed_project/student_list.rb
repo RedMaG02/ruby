@@ -5,21 +5,20 @@ class StudentList
 
   attr_accessor :list, :file, :format
 
-  protected
+  public
   def initialize(file:)
     self.file = file
   end
 
-  public
-  def read_student_list
-    file = File.open(self.file, "r")
+  def read_student_list(rfile: self.file)
+    file = File.open(rfile, "r")
     text = file.read
     hash_array = format.text_to_hash(text)
     self.list = hash_array.map {|hash| Student.new(**hash)}
     return nil
   end
 
-  def write_student_list
+  def write_student_list(wfile: self.file)
     #TODO move to function
     hash_array = self.list.map do |stud|
       arr = stud.map do |name, value|
@@ -29,7 +28,7 @@ class StudentList
     end
 
     text = format.hash_to_format(hash_array)
-    file_text = File.open(file, "w")
+    file_text = File.open(wfile, "w")
     file_text.write(text)
     file_text.close
     return nil
@@ -67,7 +66,7 @@ class StudentList
   end
 
 
-  #AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA new id? old id? which id?
+  # new id? old id? which id?
   def replace_student(student: , id:)
     self.list.each_with_index do |stud, index|
       if (stud.id = id)

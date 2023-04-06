@@ -3,7 +3,7 @@ require_relative "basic_student"
 require_relative "parser"
 require_relative 'student_short'
 require_relative 'data_list_student_short'
-require_relative 'students_list_txt'
+require_relative 'TXT_format'
 extend(Parser)
 
 #student1 = Student.new id:"1", name: "Александр", surname: "Пушкин", patronymic: "Сергеевич"
