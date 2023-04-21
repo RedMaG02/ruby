@@ -83,7 +83,7 @@ class BasicStudent
   def self.valid_id?(value)
 
     valid_reg = /\d+/
-    return value =~ valid_reg
+    return value.to_s =~ valid_reg
 
   end
 

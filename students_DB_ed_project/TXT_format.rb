@@ -1,5 +1,5 @@
+require_relative 'basic_format'
 class TXTFormat < BasicFormat
-  require_relative 'basic_format'
   require_relative 'parser'
 
   extend(Parser)

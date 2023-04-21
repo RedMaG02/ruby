@@ -4,6 +4,7 @@ require_relative "parser"
 require_relative 'student_short'
 require_relative 'data_list_student_short'
 require_relative 'TXT_format'
+require 'mysql2'
 extend(Parser)
 
 #student1 = Student.new id:"1", name: "Александр", surname: "Пушкин", patronymic: "Сергеевич"
@@ -41,8 +42,22 @@ extend(Parser)
 #list = DataListStudentShort.new(list: [short_stud1, short_stud2, short_stud3])
 #puts(list.get_names)
 #puts(list.get_data)
-test = StudentsListTXT.new()
-list = test.read_student_list
-list.append("не пикачу")
-puts(list)
-puts(test.list)
+#test = StudentsListTXT.new()
+#list = test.read_student_list
+#list.append("не пикачу")
+#puts(list)
+#puts(test.list)
+client = Mysql2::Client.new(
+  host: 'localhost',
+  username: 'RedMaG',
+  password: '159875326',
+  database: 'ruby_student'
+)
+
+
+results = client.query("SELECT * FROM students", symbolize_keys: true)
+
+results.each { |r|
+  puts Student.new(**r)
+  puts
+}
