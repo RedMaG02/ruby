@@ -3,34 +3,22 @@ class StudentList
   require_relative 'student_short'
   require_relative 'student'
 
-  attr_accessor :list, :file, :format
+  attr_accessor :list, :format
 
   public
-  def initialize(file:)
-    self.file = file
+  def initialize()
   end
 
-  def read_student_list(rfile: self.file)
-    file = File.open(rfile, "r")
-    text = file.read
-    hash_array = format.text_to_hash(text)
+  def read_student_list(rfile: nil)
+    hash_array = format.file_data_to_hash(rfile:rfile)
     self.list = hash_array.map {|hash| Student.new(**hash)}
     return nil
   end
 
-  def write_student_list(wfile: self.file)
+  def write_student_list(wfile: nil)
     #TODO move to function
-    hash_array = self.list.map do |stud|
-      arr = stud.map do |name, value|
-        [name.to_s, value]
-      end
-      arr.to_h
-    end
-
-    text = format.hash_to_format(hash_array)
-    file_text = File.open(wfile, "w")
-    file_text.write(text)
-    file_text.close
+    hash_array = get_hash_array()
+    format.hash_to_file(wfile:wfile, data:hash_array)
     return nil
   end
 
@@ -98,6 +86,16 @@ class StudentList
       id += 1
     end
     return id
+  end
+
+  def get_hash_array()
+    hash_array = self.list.map do |stud|
+      arr = stud.map do |name, value|
+        [name.to_s, value]
+      end
+      arr.to_h
+    end
+    return hash_array
   end
 
 
