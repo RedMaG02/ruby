@@ -8,7 +8,7 @@ require 'mysql2'
 extend(Parser)
 require('fox16')
 include Fox
-require_relative 'main_window_view'
+require_relative 'student_list_view'
 
 #student1 = Student.new id:"1", name: "Александр", surname: "Пушкин", patronymic: "Сергеевич"
 #student2 = Student.new id:"2", name: "Александр", surname: "Мищенко", patronymic: "Николаевич", phone: "79334523547"
@@ -66,6 +66,6 @@ require_relative 'main_window_view'
 #}
 
 app = FXApp.new
-MainWindowView.new(app)
+StudentListView.new(app)
 app.create
 app.run
