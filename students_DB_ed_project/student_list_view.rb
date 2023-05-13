@@ -1,5 +1,6 @@
 require 'fox16'
 include Fox
+require_relative 'student_list_controller'
 
 class StudentListView < FXMainWindow
   private
@@ -8,7 +9,7 @@ class StudentListView < FXMainWindow
 
   public
   attr_reader :cur_page
-  attr_accessor :table, :page_count
+  attr_accessor :table, :page_count, :controller
 
   def page_count= value
     @page_count = value
@@ -269,6 +270,8 @@ class StudentListView < FXMainWindow
     add_crud_buttons hFrame8
 
     add_row_hardcode
+
+    self.controller = StudentListController.new(self)
   end
 
   def create
@@ -277,8 +280,4 @@ class StudentListView < FXMainWindow
   end
 end
 
-app = FXApp.new
-StudentListView.new(app)
-app.create
-app.run
 
