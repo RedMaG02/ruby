@@ -1,7 +1,7 @@
 require 'fox16'
 include Fox
 
-class Window < FXMainWindow
+class MainWindowView < FXMainWindow
   private
   attr_accessor :add_button, :chg_button, :del_button, :upd_button, :refresh, :page_count_label
   attr_writer :cur_page
@@ -278,7 +278,7 @@ class Window < FXMainWindow
 end
 
 app = FXApp.new
-Window.new(app)
+MainWindowView.new(app)
 app.create
 app.run
 

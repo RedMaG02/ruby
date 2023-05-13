@@ -6,6 +6,9 @@ require_relative 'data_list_student_short'
 require_relative 'TXT_format'
 require 'mysql2'
 extend(Parser)
+require('fox16')
+include Fox
+require_relative 'main_window_view'
 
 #student1 = Student.new id:"1", name: "Александр", surname: "Пушкин", patronymic: "Сергеевич"
 #student2 = Student.new id:"2", name: "Александр", surname: "Мищенко", patronymic: "Николаевич", phone: "79334523547"
@@ -47,17 +50,22 @@ extend(Parser)
 #list.append("не пикачу")
 #puts(list)
 #puts(test.list)
-client = Mysql2::Client.new(
-  host: 'localhost',
-  username: 'RedMaG',
-  password: '159875326',
-  database: 'ruby_student'
-)
+#client = Mysql2::Client.new(
+#  host: 'localhost',
+#  username: 'RedMaG',
+#  password: '159875326',
+#  database: 'ruby_student'
+#)
 
 
-results = client.query("SELECT * FROM students", symbolize_keys: true)
+#results = client.query("SELECT * FROM students", symbolize_keys: true)
 
-results.each { |r|
-  puts Student.new(**r)
-  puts
-}
+#results.each { |r|
+#  puts Student.new(**r)
+#  puts
+#}
+
+app = FXApp.new
+MainWindowView.new(app)
+app.create
+app.run
