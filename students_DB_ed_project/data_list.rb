@@ -2,12 +2,14 @@ require_relative 'data_table'
 class DataList
   private
   attr_accessor :selected
-
+  attr_accessor :arary
   public
   attr_accessor :list
 
+
   def initialize(list:)
     self.list = list
+    self.arary = []
     # @observers = []
   end
 
@@ -19,15 +21,28 @@ class DataList
   # @observers.each { |observer| observer.on_datalist_changed(get_data) }
   #end
 
-  def select(number)
-    self.selected.append(self.list[number])
-    return nil
+  #def select(number)
+  #  self.selected.append(self.list[number])
+  #  return nil
+  #end
+
+  #def get_selected
+  #  temp = self.selected
+  #  self.selected = []
+  #  return temp
+  #end
+
+  def select(num)
+    self.arary.append(self.list[num].id)
+  end
+
+  # Наверное, такой метод должен быть
+  def unselect
+    self.arary = []
   end
 
   def get_selected
-    temp = self.selected
-    self.selected = []
-    return temp
+    self.arary
   end
 
   def get_names

@@ -93,7 +93,7 @@ class StudentMainWindow < FXMainWindow
 		list.appendItem("Нет")
 		list.appendItem("Не важно")
 		
-		field_label = FXLabel.new(frame, "Гит: ")
+		field_label = FXLabel.new(frame, field_name)
 		field = FXTextField.new(frame, field_width)
 		
 		list.connect(SEL_COMMAND) do |_, _, index|
