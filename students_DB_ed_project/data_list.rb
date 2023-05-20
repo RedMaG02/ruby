@@ -8,7 +8,16 @@ class DataList
 
   def initialize(list:)
     self.list = list
+    # @observers = []
   end
+
+  #def add_observer(observer)
+  # @observers.append(observer)
+  #end
+
+  # def notify
+  # @observers.each { |observer| observer.on_datalist_changed(get_data) }
+  #end
 
   def select(number)
     self.selected.append(self.list[number])
@@ -31,6 +40,10 @@ class DataList
     list.each { |obj| table.append([counter, *get_objects_attr(obj)]); counter += 1}
     return DataTable.new(table: table)
   end
+
+  #def replace_objects(list)
+  #  self.list=list.dup
+  #end
 
   protected
 

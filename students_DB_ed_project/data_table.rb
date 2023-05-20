@@ -16,6 +16,12 @@ class DataTable
     return self.table.size
   end
 
+  def each(&block)
+    table.each do |row|
+      block.call(row)
+    end
+  end
+
   def get_cols_number
     return 0 if table.size == 0
     return self.table[0].size

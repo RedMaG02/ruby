@@ -11,6 +11,7 @@ class StudentList
 
   def read_student_list(rfile: nil)
     hash_array = format.file_data_to_hash(rfile:rfile)
+    puts(hash_array)
     self.list = hash_array.map {|hash| Student.new(**hash)}
     return nil
   end
@@ -29,14 +30,17 @@ class StudentList
 
 
   def get_k_n_student_short_list(k:, n:, data_list: nil)
-    accum_list = self.list[((k-1)*n)..(k*n)]
+    #accum_list = self.list[((k-1)*n)..(k*n)]
+    accum_list = self.list[(k*n)...(k*n + n)]
     short_student_list = accum_list.map {|stud| StudentShort.from_student_ctor(stud)}
 
     if data_list.nil?
       return DataListStudentShort.new(list: short_student_list)
     else
       #Append to datalist or rewrite it?
-      return data_list.list.append(*short_student_list)
+      #short_student_list.each{|short_student| data_list.list.append(short_student)}
+      data_list.list = short_student_list
+      return data_list
     end
 
   end

@@ -1,11 +1,13 @@
+require_relative 'basic_format'
 class DBFormat < BasicFormat
-  require_relative 'basic_format'
+
   require 'mysql2'
-  require_relative 'db_singleton'
+  require 'json'
+  #require_relative 'db_singleton'
 
   private
   def text_to_hash(str: )
-    return  JSON.parse(str)
+    return  JSON.parse(str, {:symbolize_names => true })
   end
 
   def hash_to_format(hash: )
@@ -18,15 +20,26 @@ class DBFormat < BasicFormat
   end
 
   def read_file(rfile:)
-    results = client.query("SELECT * FROM students", symbolize_keys: true)
-    return JSON.pretty_generate(results)
+    results = client.query("SELECT * FROM students", symbolize_keys: true).to_a
+    #puts(results)
+    return JSON.generate(results)
   end
 
   def write_file(wfile:, data:)
       insert_query = "insert into students values #{data}"
       self.client.query insert_query
   end
+  public
+  attr_accessor :client
+  def initialize
+    self.client = Mysql2::Client.new(
+      host: 'localhost',
+      username: 'RedMaG',
+      password: '159875326',
+      database: 'ruby_student'
+    )
+  end
 
-  attr_accessor client = DBSingleton.instance.db_client
+
 
 end

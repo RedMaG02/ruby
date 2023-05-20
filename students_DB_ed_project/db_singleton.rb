@@ -1,20 +1,39 @@
 require "mysql2"
 
 class DBSingleton
-  private_class_method :new
+private_class_method :new
 
-  attr_accessor :db_client
-  private :"db_client="
+@instance = new
 
-  def initialize
-    self.db_client = Mysql2::Client.new(host: "localhost",
-                                        username: "RedMaG",
-                                        database: "ruby_student")
+def db_client= value
+  @db_client = value
+end
+
+private :"db_client="
+
+
+def db_client
+  self.reload
+
+  @@db_client
+end
+
+def reload
+  if @@db_client.nil? or @@db_client.closed? then
+    begin
+      self.db_client = Mysql2::Client.new(
+          host: 'localhost',
+          username: 'RedMaG',
+          password: '159875326',
+          database: 'ruby_student'
+        )
+    rescue
+      self.db_client = nil
+    end
   end
+end
 
-  @instance = new
-
-  def self.instance
-    @instance
-  end
+def self.instance
+  @@instance
+end
 end
