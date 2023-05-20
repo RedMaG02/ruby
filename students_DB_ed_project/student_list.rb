@@ -9,6 +9,10 @@ class StudentList
   def initialize()
   end
 
+  def sort_si
+    self.list.sort_by! {|obj| obj.get_surname_with_initials}
+  end
+
   def read_student_list(rfile: nil)
     hash_array = format.file_data_to_hash(rfile:rfile)
     puts(hash_array)
